@@ -1,0 +1,12 @@
+{
+  "name": "@marche/server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsnd --transpile-only --ignore-watch node_modules --respawn src/index.ts",
+    "start": "node ./index.js",
+    "deploy": "tsc && cp package.json dist && cd dist && yarn heroku",
+    "heroku": "git commit -am \"chore(deploy): on heroku\" && git push heroku master"
+  }
+}
