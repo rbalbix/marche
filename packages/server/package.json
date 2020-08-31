@@ -4,9 +4,27 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd --transpile-only --ignore-watch node_modules --respawn src/index.ts",
+    "dev": "tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "start": "node ./index.js",
     "deploy": "tsc && cp package.json dist && cd dist && yarn heroku",
     "heroku": "git commit -am \"chore(deploy): on heroku\" && git push heroku master"
+  },
+  "dependencies": {
+    "celebrate": "^12.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.1.0",
+    "http-status-codes": "^2.1.2",
+    "log4js": "^6.3.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.7",
+    "@types/express": "^4.17.7",
+    "@types/helmet": "^0.0.48",
+    "@types/morgan": "^1.9.1",
+    "cross-env": "^7.0.2",
+    "ts-node-dev": "^1.0.0-pre.61"
   }
 }

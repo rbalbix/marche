@@ -26,8 +26,9 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     semi: [2, 'always'], // Added by rbalbi
-    'space-before-function-paren': ['error', 'never'], // Added by rbalbi
-    '@typescript-eslint/explicit-function-return-type': 'off' // Added by rbalbi
+    'space-before-function-paren': 'off', // Added by rbalbi
+    '@typescript-eslint/explicit-function-return-type': 'off', // Added by rbalbi
+    '@typescript-eslint/explicit-module-boundary-types': 'off' // Added by rbalbi
   },
   settings: {
     'import/resolver': {
