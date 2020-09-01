@@ -1,5 +1,7 @@
 import App from './app';
 
+import './database/connection';
+
 const app = new App().getApp();
 
 // ease to start Server an to deploy || Verify the environment

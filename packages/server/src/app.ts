@@ -1,7 +1,6 @@
 import express, { Application } from 'express';
 import { config } from 'dotenv';
 import morgan from 'morgan';
-import path from 'path';
 
 // Security stuff
 import cors from 'cors';
@@ -9,7 +8,7 @@ import helmet from 'helmet';
 import { errors } from 'celebrate';
 
 // Import routes
-import BaseRouter from './routes';
+import { router as BaseRouter } from './routes';
 
 /**
  *
@@ -45,19 +44,20 @@ export default class App {
     }
     this.express.disable('x-powered-by');
     this.express.use(
-      cors({
-        exposedHeaders: ['X-Total-Count', 'X-Total-Regular-Count', 'X-round']
-      })
+      cors()
+      //   {
+      //   exposedHeaders: ['X-Total-Count', 'X-Total-Regular-Count', 'X-round']
+      // }
     );
 
     // To understand body with json format
     this.express.use(express.json());
 
     // Upload content
-    this.express.use(
-      '/files',
-      express.static(path.resolve(__dirname, '..', 'uploads'))
-    );
+    // this.express.use(
+    //   '/files',
+    //   express.static(path.resolve(__dirname, '..', 'uploads'))
+    // );
 
     // Show routes called in console during development
     if (process.env.NODE_ENV === 'development') {

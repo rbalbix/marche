@@ -1,1 +1,1 @@
-export * as MatchController from './MatchController';
+export { ProductController } from './ProductControler';

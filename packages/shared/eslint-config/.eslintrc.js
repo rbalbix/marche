@@ -28,7 +28,8 @@ module.exports = {
     semi: [2, 'always'], // Added by rbalbi
     'space-before-function-paren': 'off', // Added by rbalbi
     '@typescript-eslint/explicit-function-return-type': 'off', // Added by rbalbi
-    '@typescript-eslint/explicit-module-boundary-types': 'off' // Added by rbalbi
+    '@typescript-eslint/explicit-module-boundary-types': 'off', // Added by rbalbi
+    'no-useless-constructor': 'off' // Added by rbalbi
   },
   settings: {
     'import/resolver': {
