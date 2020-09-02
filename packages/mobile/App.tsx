@@ -1,21 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
+/* eslint-disable camelcase */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'react-native';
+import { AppLoading } from 'expo';
+
+import { Ubuntu_700Bold, useFonts } from '@expo-google-fonts/ubuntu';
+import {
+  Archivo_400Regular,
+  Archivo_700Bold
+} from '@expo-google-fonts/archivo';
+
+import Routes from './src/routes';
 
 export default function App() {
+  const [fonstLoaded] = useFonts({
+    Ubuntu_700Bold,
+    Archivo_400Regular,
+    Archivo_700Bold
+  });
+
+  if (!fonstLoaded) {
+    return <AppLoading />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar barStyle="light-content" backgroundColor="#8257E5" />
+      <Routes />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
