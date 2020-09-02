@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "start": "node ./index.js",
+    "migration:run": "tsnd ../../node_modules/typeorm/cli.js migration:run",
+    "migration:revert": "tsnd ../../node_modules/typeorm/cli.js migration:revert",
+    "seed": "tsnd --transpile-only --ignore-watch node_modules src/database/seeds/seeder.ts",
     "deploy": "tsc && cp package.json dist && cd dist && yarn heroku",
     "heroku": "git commit -am \"chore(deploy): on heroku\" && git push heroku master"
   },
