@@ -13,6 +13,6 @@ export const Container = styled.View`
 
 export const Text = styled.Text`
   margin-top: 10px;
-  font-family: 'Archivo_700Bold';
+  font-family: 'archivo_700';
   font-size: ${Math.min(hp('2%'), 16)}px;
 `;

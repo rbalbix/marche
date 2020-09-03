@@ -5,10 +5,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import SuspenseLoading from './components/SuspenseLoading';
 
-// const Main = lazy(() => import('./pages/Main'));
-// const Detail = lazy(() => import('./pages/Detail'));
-// const Rule = lazy(() => import('./pages/Rule'));
-// const RuleIcon = lazy(() => import('./components/RuleIcon'));
+import colors from './styles/colors';
+
+const Home = lazy(() => import('./pages/Home'));
+const AddMarketList = lazy(() => import('./components/AddMarketList'));
 
 const Stack = createStackNavigator();
 
@@ -18,43 +18,25 @@ export default function Routes() {
       <Suspense fallback={<SuspenseLoading />}>
         <Stack.Navigator
           screenOptions={{
-            title: 'Calcio',
-            headerStyle: { backgroundColor: '#8257E5' },
-            headerTintColor: '#FFF',
+            title: 'Marché',
+            headerStyle: { backgroundColor: colors.primary },
+            headerTintColor: colors.titleText,
             headerTitleStyle: {
-              fontFamily: 'Ubuntu_700Bold',
+              fontFamily: 'ubuntu_700',
               fontWeight: 'bold',
               fontSize: 24
             },
             headerTitleAlign: 'center'
           }}
         >
-          {/* <Stack.Screen
-            name="Calcio"
-            component={Main}
+          <Stack.Screen
+            name="Home"
+            component={Home}
             options={{
-              title: 'Calcio',
-              headerRight: () => <RuleIcon />
+              title: 'Marché',
+              headerRight: () => <AddMarketList />
             }}
-          /> */}
-
-          {/* <Stack.Screen
-            name="Category"
-            component={Detail}
-            options={({ route }) => ({
-              title: `TORNEIO ${route.params.info.category}`,
-              headerBackTitleVisible: false
-            })}
-          /> */}
-
-          {/* <Stack.Screen
-            name="Rule"
-            component={Rule}
-            options={{
-              title: 'Regulamento',
-              headerBackTitleVisible: false
-            }}
-          /> */}
+          />
         </Stack.Navigator>
       </Suspense>
     </NavigationContainer>
