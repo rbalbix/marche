@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { AppLoading } from 'expo';
 
@@ -10,7 +10,8 @@ import {
   Archivo_700Bold
 } from '@expo-google-fonts/archivo';
 
-import Routes from './src/routes';
+import SuspenseLoading from './src/components/SuspenseLoading';
+const Routes = lazy(() => import('./src/routes'));
 
 export default function App() {
   const [fonstLoaded] = useFonts({
@@ -25,9 +26,9 @@ export default function App() {
   }
 
   return (
-    <>
+    <Suspense fallback={<SuspenseLoading />}>
       <StatusBar style="light" />
       <Routes />
-    </>
+    </Suspense>
   );
 }

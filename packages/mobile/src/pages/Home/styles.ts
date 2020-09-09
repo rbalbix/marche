@@ -19,3 +19,11 @@ export const Container = styled.View`
 `;
 
 export const Main = styled.View``;
+
+export const Month = styled.Text`
+  color: ${colors.text};
+  font-family: archivo_500;
+  font-size: ${Math.min(hp('3%'), 18)}px;
+
+  padding: 0 0 5px 5px;
+`;

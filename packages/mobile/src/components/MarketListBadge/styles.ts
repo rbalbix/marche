@@ -5,12 +5,13 @@ import colors from '../../styles/colors';
 
 const cardHeaderFontSize = `${Math.min(hp('3%'), 16)}px`;
 
-export const Card = styled.View`
+export const Card = styled.TouchableOpacity`
   width: 100%;
-  height: 100px;
+  height: 120px;
 
   background: ${colors.cardBackground};
   border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
   margin-bottom: 20px;
 `;
@@ -54,7 +55,7 @@ export const Badge = styled.View`
   border-radius: 4px;
 `;
 
-export const Total = styled.Text`
+export const TotalItems = styled.Text`
   color: ${colors.badgeText};
   font-family: ubuntu_700;
   font-size: ${Math.min(hp('3%'), 14)}px;

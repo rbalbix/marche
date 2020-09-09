@@ -8,9 +8,17 @@ import SuspenseLoading from './components/SuspenseLoading';
 import colors from './styles/colors';
 
 const Home = lazy(() => import('./pages/Home'));
+const MarketList = lazy(() => import('./pages/MarketList'));
+const CreateList = lazy(() => import('./pages/CreateList'));
 const AddMarketList = lazy(() => import('./components/AddMarketList'));
 
-const Stack = createStackNavigator();
+type RootStackParamList = {
+  Home: undefined;
+  MarketList: { listName: string };
+  CreateMarketList: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function Routes() {
   return (
@@ -34,8 +42,24 @@ export default function Routes() {
             component={Home}
             options={{
               title: 'Marché',
+              // eslint-disable-next-line react/display-name
               headerRight: () => <AddMarketList />
             }}
+          />
+
+          <Stack.Screen
+            name="MarketList"
+            component={MarketList}
+            options={({ route }) => ({
+              title: route.params.listName,
+              headerBackTitleVisible: false
+            })}
+          />
+
+          <Stack.Screen
+            name="CreateMarketList"
+            component={CreateList}
+            options={{ title: 'Nova Lista', headerBackTitleVisible: false }}
           />
         </Stack.Navigator>
       </Suspense>

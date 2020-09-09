@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
+import SuspenseLoading from '../../components/SuspenseLoading';
 
-import MarketList from '../../components/MarketList';
+import { Wrapper, Container, Main, Month } from './styles';
 
-import { Wrapper, Container, Main } from './styles';
+const MarketListBadge = lazy(() => import('../../components/MarketListBadge'));
 
 const Home: React.FC = () => {
   return (
     <Wrapper>
       <Container>
         <Main>
-          <MarketList />
-          <MarketList />
-          <MarketList />
-          <MarketList />
-          <MarketList />
-          <MarketList />
-          <MarketList />
-          <MarketList />
+          <Suspense fallback={<SuspenseLoading />}>
+            <Month>Agosto</Month>
+            <MarketListBadge />
+            <MarketListBadge />
+            <Month>Julho</Month>
+            <MarketListBadge />
+            <MarketListBadge />
+            <MarketListBadge />
+            <Month>Junho</Month>
+            <MarketListBadge />
+            <MarketListBadge />
+            <MarketListBadge />
+          </Suspense>
         </Main>
       </Container>
     </Wrapper>

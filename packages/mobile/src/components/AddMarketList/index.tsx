@@ -1,24 +1,21 @@
 import React from 'react';
-import { TouchableOpacity, Platform, Alert } from 'react-native';
-// import { useNavigation } from '@react-navigation/native';
-
-// import * as Linking from 'expo-linking';
+import { TouchableOpacity, Platform } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { MaterialIcons } from '@expo/vector-icons';
 import colors from '../../styles/colors';
 
 const AddMarketList: React.FC = () => {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   function navigateToNewMarketList() {
-    // navigation.navigate('Rule');
-    Alert.alert('Nova lista !');
+    navigation.navigate('CreateMarketList');
   }
 
   async function handleNewMarketListClick() {
     // const response = await api.get('/champ/current');
     // Linking.openURL(response.data.rule_url);
-    Alert.alert('Lista nova !');
+    navigation.navigate('CreateMarketList');
   }
 
   return (
