@@ -1,12 +1,25 @@
-import React from 'react';
-import { Text } from 'react-native';
+import React, { Suspense, lazy } from 'react';
 
 import { Container } from './styles';
+import SuspenseLoading from '../../components/SuspenseLoading';
+
+const CategoryHorizontalList = lazy(
+  () => import('../../components/CategoryHorizontalList')
+);
+
+const AddCategoryProducts = lazy(
+  () => import('../../components/AddCategoryProducts')
+);
 
 const CreateList: React.FC = () => {
   return (
     <Container>
-      <Text>CreateList</Text>
+      <Suspense fallback={<SuspenseLoading />}>
+        <CategoryHorizontalList />
+
+        <AddCategoryProducts />
+        <AddCategoryProducts />
+      </Suspense>
     </Container>
   );
 };
