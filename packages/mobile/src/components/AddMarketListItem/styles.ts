@@ -44,7 +44,7 @@ export const UnityItem = styled.View`
 
 export const UnityItemText = styled.Text`
   color: ${colors.text};
-  font-family: archivo_400;
+  font-family: archivo_700;
   font-size: ${Math.min(hp('3%'), 16)}px;
 `;
 

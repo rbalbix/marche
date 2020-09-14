@@ -29,7 +29,8 @@ module.exports = {
     'space-before-function-paren': 'off', // Added by rbalbi
     '@typescript-eslint/explicit-function-return-type': 'off', // Added by rbalbi
     '@typescript-eslint/explicit-module-boundary-types': 'off', // Added by rbalbi
-    'no-useless-constructor': 'off' // Added by rbalbi
+    'no-useless-constructor': 'off', // Added by rbalbi
+    'import/no-duplicates': 'off' // Added by rbalbi
   },
   settings: {
     'import/resolver': {
