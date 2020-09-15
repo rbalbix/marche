@@ -16,14 +16,24 @@ import {
   Separator
 } from './styles';
 
-const AddMarketListItem: React.FC = () => {
+interface IProduct {
+  id: string;
+  name: string;
+  unity: string;
+}
+interface IProps {
+  item: IProduct;
+  lastItem: boolean;
+}
+
+const AddMarketListItem: React.FC<IProps> = ({ item, lastItem }: IProps) => {
   return (
     <Container>
       <ListItem>
         <ProductGroup>
-          <ProductName>Feijão</ProductName>
+          <ProductName>{item.name}</ProductName>
           <UnityItem>
-            <UnityItemText>1 kg</UnityItemText>
+            <UnityItemText>{item.unity}</UnityItemText>
           </UnityItem>
         </ProductGroup>
         <TotalItemGroup>
@@ -36,7 +46,7 @@ const AddMarketListItem: React.FC = () => {
           </MinusButton>
         </TotalItemGroup>
       </ListItem>
-      <Separator />
+      <Separator lastItem={lastItem} />
     </Container>
   );
 };

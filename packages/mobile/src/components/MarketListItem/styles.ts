@@ -24,63 +24,70 @@ export const ProductGroup = styled.View`
   align-items: center;
 `;
 
-export const CheckBoxWrapper = styled.View<IProps>`
-  margin-right: 20px;
+export const CheckBox = styled(Checkbox.Item)<IProps>`
+  padding: 0;
+  margin-right: 0;
+
+  border-radius: 8px;
 
   ${({ ios }) => {
     return (
       ios &&
       css`
-        width: 36px;
-        height: 36px;
-
         border: 1px solid ${colors.primary};
-        border-radius: 18px;
-        background: transparent;
-
-        justify-content: center;
-        align-items: center;
       `
     );
   }}
 `;
 
-export const CheckBox = styled(Checkbox)``;
-
 export const ProductName = styled.Text`
   color: ${colors.text};
   font-family: archivo_400;
   font-size: ${Math.min(hp('4%'), 24)}px;
+
+  margin-left: 15px;
 `;
 
 export const TotalItem = styled.Text`
   color: ${colors.text};
   font-family: archivo_400;
   font-size: ${Math.min(hp('4%'), 24)}px;
+
+  margin-right: 5px;
 `;
 
 export const UnityItem = styled.View`
-  width: ${Math.min(wp('25%'), 150)}px;
-
-  border: 1px solid ${colors.line};
-  border-radius: 4px;
-
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
   margin-left: 50px;
-
-  padding: 4px;
 `;
 
 export const UnityItemText = styled.Text`
   color: ${colors.text};
   font-family: archivo_700;
   font-size: ${Math.min(hp('3%'), 16)}px;
+
+  border: 1px solid ${colors.line};
+  border-radius: 4px;
+
+  padding: 2px 8px;
 `;
 
-export const Separator = styled(Divider)`
-  background: ${colors.line};
+interface ISeparatorProps {
+  lastItem: boolean;
+}
 
+export const Separator = styled(Divider)<ISeparatorProps>`
+  background: ${colors.line};
   margin: 20px 5px;
+
+  ${({ lastItem }) => {
+    return (
+      lastItem &&
+      css`
+        background: ${colors.cardBackground};
+        margin: 20px 0 10px;
+      `
+    );
+  }}
 `;

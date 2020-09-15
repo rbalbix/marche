@@ -1,12 +1,9 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { Divider } from 'react-native-paper';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp
-} from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import colors from '../../styles/colors';
 
 export const Container = styled.View``;
@@ -30,22 +27,20 @@ export const ProductName = styled.Text`
 `;
 
 export const UnityItem = styled.View`
-  width: ${Math.min(wp('25%'), 150)}px;
-
-  border: 1px solid ${colors.line};
-  border-radius: 4px;
-
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
   margin-top: 10px;
-  padding: 4px;
 `;
 
 export const UnityItemText = styled.Text`
   color: ${colors.text};
   font-family: archivo_700;
   font-size: ${Math.min(hp('3%'), 16)}px;
+
+  border: 1px solid ${colors.line};
+  border-radius: 4px;
+
+  padding: 4px 8px;
 `;
 
 export const TotalItemGroup = styled.View`
@@ -78,8 +73,27 @@ export const MinusButton = styled.TouchableOpacity``;
 
 export const MinusIcon = styled(Icons)``;
 
-export const Separator = styled(Divider)`
-  background: ${colors.line};
+// export const Separator = styled(Divider)`
+//   background: ${colors.line};
 
+//   margin: 20px 5px;
+// `;
+
+interface ISeparatorProps {
+  lastItem: boolean;
+}
+
+export const Separator = styled(Divider)<ISeparatorProps>`
+  background: ${colors.line};
   margin: 20px 5px;
+
+  ${({ lastItem }) => {
+    return (
+      lastItem &&
+      css`
+        background: ${colors.cardBackground};
+        margin: 20px 0 5px;
+      `
+    );
+  }}
 `;

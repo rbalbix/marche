@@ -5,7 +5,35 @@ import { Container } from './styles';
 
 export type colorObserver = (uid: string) => void;
 
+interface ICategory {
+  id: string;
+  name: string;
+}
+
 const CategoryHorizontalList: React.FC = () => {
+  const data: ICategory[] = [
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bf',
+      name: 'Bebidas'
+    },
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28be',
+      name: 'Alimentos'
+    },
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bd',
+      name: 'Limpeza'
+    },
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bc',
+      name: 'Frutas'
+    },
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bb',
+      name: 'Legumes'
+    }
+  ];
+
   const observers = useRef<colorObserver[]>([]);
 
   function attach(observer: colorObserver) {
@@ -27,13 +55,15 @@ const CategoryHorizontalList: React.FC = () => {
 
   return (
     <Container>
-      <CategoryButton attach={attach} detach={detach} notify={notify} />
-      <CategoryButton attach={attach} detach={detach} notify={notify} />
-      <CategoryButton attach={attach} detach={detach} notify={notify} />
-      <CategoryButton attach={attach} detach={detach} notify={notify} />
-      <CategoryButton attach={attach} detach={detach} notify={notify} />
-      <CategoryButton attach={attach} detach={detach} notify={notify} />
-      <CategoryButton attach={attach} detach={detach} notify={notify} />
+      {data.map(category => (
+        <CategoryButton
+          key={category.id}
+          item={category}
+          attach={attach}
+          detach={detach}
+          notify={notify}
+        />
+      ))}
     </Container>
   );
 };

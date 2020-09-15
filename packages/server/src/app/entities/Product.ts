@@ -17,6 +17,12 @@ export class Product {
   })
   name: string;
 
+  @Column({
+    length: 50,
+    nullable: false
+  })
+  unity: string;
+
   @CreateDateColumn()
   public createdAt: Date;
 

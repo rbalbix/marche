@@ -6,13 +6,19 @@ import { colorObserver } from '../CategoryHorizontalList';
 import { Container, Button, ButtonText } from './styles';
 import colors from '../../styles/colors';
 
+interface ICategory {
+  id: string;
+  name: string;
+}
 interface IProps {
+  item: ICategory;
   attach: (observer: colorObserver) => void;
   detach: (observer: colorObserver) => void;
   notify: (uid: string) => void;
 }
 
 const CategoryButton: React.FC<IProps> = ({
+  item,
   attach,
   detach,
   notify
@@ -43,7 +49,7 @@ const CategoryButton: React.FC<IProps> = ({
   return (
     <Container>
       <Button onPress={handleClick}>
-        <ButtonText style={{ color }}>Bebida</ButtonText>
+        <ButtonText style={{ color }}>{item.name}</ButtonText>
       </Button>
     </Container>
   );

@@ -9,8 +9,10 @@ export const Container = styled.ScrollView`
 
 export const TotalItems = styled.Text`
   color: ${colors.text};
-  font-family: archivo_500;
-  font-size: ${Math.min(hp('3%'), 18)}px;
+  font-family: archivo_700;
+  font-size: ${Math.min(hp('3%'), 24)}px;
+
+  align-self: flex-end;
 
   margin-bottom: 16px;
 `;

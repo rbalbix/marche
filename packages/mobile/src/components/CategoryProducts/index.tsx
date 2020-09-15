@@ -5,15 +5,36 @@ import SuspenseLoading from '../SuspenseLoading';
 
 const MarketListItem = lazy(() => import('../MarketListItem'));
 
-const CategoryProducts: React.FC = () => {
+interface IProduct {
+  id: string;
+  name: string;
+  unity: string;
+  isMarked: boolean;
+  productQuantity: number;
+}
+interface IProps {
+  item: {
+    id: string;
+    name: string;
+    products: IProduct[];
+  };
+}
+
+const CategoryProducts: React.FC<IProps> = ({ item }: IProps) => {
   return (
     <Container>
       <Suspense fallback={<SuspenseLoading />}>
-        <CategoryName>Alimentos</CategoryName>
+        <CategoryName>{item.name}</CategoryName>
         <CategoryList style={{ elevation: 3 }}>
-          <MarketListItem />
-          <MarketListItem />
-          <MarketListItem />
+          {item.products.map(product => (
+            <MarketListItem
+              key={product.id}
+              item={product}
+              lastItem={
+                item.products[item.products.length - 1].id === product.id
+              }
+            />
+          ))}
         </CategoryList>
       </Suspense>
     </Container>

@@ -5,7 +5,6 @@ import {
   Container,
   ListItem,
   ProductGroup,
-  CheckBoxWrapper,
   CheckBox,
   ProductName,
   TotalItem,
@@ -15,32 +14,46 @@ import {
 } from './styles';
 import colors from '../../styles/colors';
 
-const MarketListItem: React.FC = () => {
-  const [checked, setChecked] = useState(false);
+interface IProduct {
+  id: string;
+  name: string;
+  unity: string;
+  isMarked: boolean;
+  productQuantity: number;
+}
+interface IProps {
+  item: IProduct;
+  lastItem: boolean;
+}
+
+const MarketListItem: React.FC<IProps> = ({ item, lastItem }: IProps) => {
+  const [checked, setChecked] = useState(item.isMarked);
+
+  function handlePress() {
+    setChecked(!checked);
+  }
 
   return (
     <Container>
       <ListItem>
         <ProductGroup>
-          <CheckBoxWrapper ios={Platform.OS === 'ios'}>
-            <CheckBox
-              status={checked ? 'checked' : 'unchecked'}
-              color={colors.primary}
-              onPress={() => {
-                setChecked(!checked);
-              }}
-            />
-          </CheckBoxWrapper>
-          <ProductName>Arroz</ProductName>
+          <CheckBox
+            status={checked ? 'checked' : 'unchecked'}
+            color={colors.primary}
+            onPress={handlePress}
+            label=""
+            ios={Platform.OS === 'ios'}
+          />
+          <ProductName>{item.name}</ProductName>
         </ProductGroup>
-        <TotalItem>1</TotalItem>
+        <TotalItem>{item.productQuantity}</TotalItem>
       </ListItem>
 
       <UnityItem>
-        <UnityItemText>unidade</UnityItemText>
+        <UnityItemText>{item.unity}</UnityItemText>
       </UnityItem>
 
-      <Separator />
+      <Separator lastItem={lastItem} />
     </Container>
   );
 };
