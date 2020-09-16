@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Container,
@@ -27,6 +27,18 @@ interface IProps {
 }
 
 const AddMarketListItem: React.FC<IProps> = ({ item, lastItem }: IProps) => {
+  const [quantity, setQuantity] = useState(0);
+
+  function increaseQuantity() {
+    setQuantity(quantity + 1);
+  }
+
+  function decreaseQuantity() {
+    if (quantity !== 0) {
+      setQuantity(quantity - 1);
+    }
+  }
+
   return (
     <Container>
       <ListItem>
@@ -37,11 +49,11 @@ const AddMarketListItem: React.FC<IProps> = ({ item, lastItem }: IProps) => {
           </UnityItem>
         </ProductGroup>
         <TotalItemGroup>
-          <PlusButton>
+          <PlusButton onPress={increaseQuantity}>
             <PlusIcon name="add" size={30} />
           </PlusButton>
-          <TotalItem>1</TotalItem>
-          <MinusButton>
+          <TotalItem>{quantity}</TotalItem>
+          <MinusButton onPress={decreaseQuantity}>
             <MinusIcon name="remove" size={30} />
           </MinusButton>
         </TotalItemGroup>
