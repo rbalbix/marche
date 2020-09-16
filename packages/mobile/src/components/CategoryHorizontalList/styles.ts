@@ -20,5 +20,5 @@ export const CategoryButtonText = styled.Text`
   font-family: archivo_400;
   font-size: ${Math.min(hp('4%'), 24)}px;
 
-  margin: 0 10px;
+  margin: 0 5px;
 `;

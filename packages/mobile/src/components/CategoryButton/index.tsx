@@ -1,10 +1,10 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { uid } from 'react-uid';
 
 import { colorObserver } from '../CategoryHorizontalList';
 
 import { Container, Button, ButtonText } from './styles';
 import colors from '../../styles/colors';
+import fonts from '../../styles/fonts';
 
 interface ICategory {
   id: string;
@@ -24,19 +24,23 @@ const CategoryButton: React.FC<IProps> = ({
   notify
 }: IProps) => {
   const initialColor = colors.text;
+  const initialFontFamily = fonts.archivo_400;
 
   const [color, setColor] = useState(initialColor);
-  const [genUid] = useState(uid({ item: 1 }));
+  const [fontFamily, setFontFamily] = useState(initialFontFamily);
+  const [genUid] = useState(item.id);
 
   const onColorUpdated: colorObserver = useCallback((uid: string) => {
     if (genUid !== uid) {
       setColor(initialColor);
+      setFontFamily(initialFontFamily);
     }
   }, []);
 
   const handleClick = useCallback(() => {
     notify(genUid);
     setColor(colors.cardHeader);
+    setFontFamily(fonts.archivo_700);
   }, []);
 
   useEffect(() => {
@@ -49,7 +53,7 @@ const CategoryButton: React.FC<IProps> = ({
   return (
     <Container>
       <Button onPress={handleClick}>
-        <ButtonText style={{ color }}>{item.name}</ButtonText>
+        <ButtonText style={{ color, fontFamily }}>{item.name}</ButtonText>
       </Button>
     </Container>
   );

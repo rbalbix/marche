@@ -9,6 +9,8 @@ export const CategoryName = styled.Text`
   color: ${colors.text};
   font-family: archivo_700;
   font-size: ${Math.min(hp('3%'), 24)}px;
+
+  margin-left: 5px;
 `;
 
 export const CategoryList = styled.View`

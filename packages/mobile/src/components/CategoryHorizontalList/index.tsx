@@ -10,7 +10,11 @@ interface ICategory {
   name: string;
 }
 
-const CategoryHorizontalList: React.FC = () => {
+interface IProps {
+  loadCategory: (uid: string) => void;
+}
+
+const CategoryHorizontalList: React.FC<IProps> = ({ loadCategory }: IProps) => {
   const data: ICategory[] = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bf',
@@ -51,6 +55,7 @@ const CategoryHorizontalList: React.FC = () => {
     observers.current.forEach(observer => {
       observer(uid);
     });
+    loadCategory(uid);
   }
 
   return (
