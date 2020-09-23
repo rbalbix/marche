@@ -9,9 +9,9 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "postinstall": "expo-yarn-workspaces postinstall",
-    "deploy": "vercel web-build",
+    "deploy": "vercel deploy",
     "predeploy": "expo build:web",
-    "deploy:prod": "vercel web-build --prod",
+    "deploy:prod": "vercel --prod",
     "store": "rm ../server/dist/package.json && expo publish"
   },
   "dependencies": {
