@@ -29,7 +29,7 @@ const CategoryHorizontalList: React.FC<IProps> = ({ loadCategory }: IProps) => {
       name: 'Limpeza'
     },
     {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bc',
+      id: 'bd8acbea-c1b1-46c2-aed5-3ad53abb28be',
       name: 'Frutas'
     },
     {
