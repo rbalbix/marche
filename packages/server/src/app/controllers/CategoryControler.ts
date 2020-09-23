@@ -7,7 +7,10 @@ import log from '../../services/logger';
 export class CategoryController {
   async index(req: Request, res: Response): Promise<Response> {
     try {
-      const categories = await getRepository(Category).find();
+      const categories = await getRepository(Category)
+        .createQueryBuilder('category')
+        .orderBy('name')
+        .getMany();
 
       return res.status(200).send(categories);
     } catch (err) {

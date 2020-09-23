@@ -9,10 +9,10 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "postinstall": "expo-yarn-workspaces postinstall",
-    "deploy": "vercel deploy",
+    "deploy": "vercel web-build",
     "predeploy": "expo build:web",
-    "deploy:prod": "vercel --prod",
-    "store": "rm ../server/dist/package.json && expo publish"
+    "deploy:prod": "vercel web-build --prod",
+    "deploy:appstore": "rm ../server/dist/package.json && expo publish"
   },
   "dependencies": {
     "@expo-google-fonts/archivo": "^0.1.0",
@@ -36,7 +36,8 @@
     "react-native-safe-area-context": "~3.0.7",
     "react-native-screens": "~2.9.0",
     "react-native-web": "~0.11.7",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "@marche/axios-config": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

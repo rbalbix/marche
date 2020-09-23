@@ -19,7 +19,8 @@ export class Product {
 
   @Column({
     length: 50,
-    nullable: false
+    nullable: false,
+    default: 'unidade'
   })
   unity: string;
 

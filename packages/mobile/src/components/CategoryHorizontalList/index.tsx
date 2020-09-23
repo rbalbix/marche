@@ -1,4 +1,7 @@
 import React, { useRef } from 'react';
+import useFetch from '@marche/swr-config';
+
+import SuspenseLoading from '../SuspenseLoading';
 import CategoryButton from '../CategoryButton';
 
 import { Container } from './styles';
@@ -15,28 +18,11 @@ interface IProps {
 }
 
 const CategoryHorizontalList: React.FC<IProps> = ({ loadCategory }: IProps) => {
-  const data: ICategory[] = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bf',
-      name: 'Bebidas'
-    },
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28be',
-      name: 'Alimentos'
-    },
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bd',
-      name: 'Limpeza'
-    },
-    {
-      id: 'bd8acbea-c1b1-46c2-aed5-3ad53abb28be',
-      name: 'Frutas'
-    },
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bb',
-      name: 'Legumes'
-    }
-  ];
+  const { data } = useFetch('/category');
+
+  if (!data) {
+    return <SuspenseLoading />;
+  }
 
   const observers = useRef<colorObserver[]>([]);
 
@@ -60,7 +46,7 @@ const CategoryHorizontalList: React.FC<IProps> = ({ loadCategory }: IProps) => {
 
   return (
     <Container>
-      {data.map(category => (
+      {data.map((category: ICategory) => (
         <CategoryButton
           key={category.id}
           item={category}
