@@ -2,21 +2,12 @@ import { getRepository } from 'typeorm';
 import log from '../../../services/logger';
 
 export const CategorySeed = [
-  {
-    name: 'Alimentos'
-  },
-  {
-    name: 'Bebidas'
-  },
-  {
-    name: 'Frutas'
-  },
-  {
-    name: 'Legumes'
-  },
-  {
-    name: 'Limpeza'
-  }
+  { name: 'Alimentos' },
+  { name: 'Bebidas' },
+  { name: 'Frutas' },
+  { name: 'Legumes' },
+  { name: 'Limpeza' },
+  { name: 'Doces' }
 ];
 
 async function seed() {

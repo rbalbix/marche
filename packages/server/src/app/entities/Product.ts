@@ -3,8 +3,11 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  ManyToOne
 } from 'typeorm';
+
+import { Category } from './Category';
 
 @Entity()
 export class Product {
@@ -23,6 +26,11 @@ export class Product {
     default: 'unidade'
   })
   unity: string;
+
+  @ManyToOne(() => Category, category => category.products, {
+    onDelete: 'CASCADE'
+  })
+  category: Category;
 
   @CreateDateColumn()
   public createdAt: Date;

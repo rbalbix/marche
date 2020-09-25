@@ -15,6 +15,12 @@ const productController = new ProductController();
 router.get('/', productController.index);
 
 /******************************************************************************
+ *         Get Products by Category - "GET /product/category/:id"
+ ******************************************************************************/
+
+router.get('/category/:id', productController.findByCategory);
+
+/******************************************************************************
  *                      Get Specific Product - "GET /product/:id"
  ******************************************************************************/
 

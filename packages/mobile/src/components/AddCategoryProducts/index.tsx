@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
+import useFetch from '@marche/swr-config';
 
-import { Container, CategoryName, CategoryList } from './styles';
+import { Container, CategoryName, CategoryList, Empty } from './styles';
 import SuspenseLoading from '../SuspenseLoading';
 
 const AddMarketListItem = lazy(() => import('../AddMarketListItem'));
@@ -14,7 +15,6 @@ interface IProduct {
 interface ICategory {
   id: string;
   name: string;
-  products: IProduct[];
 }
 
 interface IProps {
@@ -22,22 +22,34 @@ interface IProps {
 }
 
 const AddCategoryProducts: React.FC<IProps> = ({ item }: IProps) => {
+  console.log(item.id === '');
+  const { data } = useFetch(`/product/category/${item.id}`);
+
+  if (item.id !== '' && !data) {
+    return <SuspenseLoading />;
+  }
+
   return (
     <Container>
-      <Suspense fallback={<SuspenseLoading />}>
-        <CategoryName>{item.name}</CategoryName>
-        <CategoryList style={{ elevation: 3 }}>
-          {item.products.map(product => (
-            <AddMarketListItem
-              key={product.id}
-              item={product}
-              lastItem={
-                item.products[item.products.length - 1].id === product.id
-              }
-            />
-          ))}
-        </CategoryList>
-      </Suspense>
+      {item.id === '' || data.length === 0 ? (
+        <Empty>
+          Não há produtos nesta categoria. Selecione uma categoria para ver a
+          lista de produtos.
+        </Empty>
+      ) : (
+        <Suspense fallback={<SuspenseLoading />}>
+          <CategoryName>{item.name}</CategoryName>
+          <CategoryList style={{ elevation: 3 }}>
+            {data.map((product: IProduct) => (
+              <AddMarketListItem
+                key={product.id}
+                item={product}
+                lastItem={data[data.length - 1].id === product.id}
+              />
+            ))}
+          </CategoryList>
+        </Suspense>
+      )}
     </Container>
   );
 };

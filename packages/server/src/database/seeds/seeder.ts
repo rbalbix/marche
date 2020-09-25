@@ -1,7 +1,7 @@
 import { createConnection } from 'typeorm';
 
 import { seedCategory } from './Category/category.seed';
-import { seedProduct } from './Product/product.seed';
+import { seedProduct } from './Product';
 
 import log from '../../services/logger';
 

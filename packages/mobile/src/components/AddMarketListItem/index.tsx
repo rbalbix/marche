@@ -50,7 +50,7 @@ const AddMarketListItem: React.FC<IProps> = ({ item, lastItem }: IProps) => {
         </ProductGroup>
         <TotalItemGroup>
           <PlusButton onPress={increaseQuantity}>
-            <PlusIcon name="add" size={30} />
+            <PlusIcon name="add" size={50} />
           </PlusButton>
           <TotalItem>{quantity}</TotalItem>
           <MinusButton onPress={decreaseQuantity}>

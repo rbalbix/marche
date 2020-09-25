@@ -3,8 +3,11 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from 'typeorm';
+
+import { Product } from './Product';
 
 @Entity()
 export class Category {
@@ -16,6 +19,9 @@ export class Category {
     nullable: false
   })
   name: string;
+
+  @OneToMany(() => Product, product => product.category)
+  products: Product[];
 
   @CreateDateColumn()
   public createdAt: Date;

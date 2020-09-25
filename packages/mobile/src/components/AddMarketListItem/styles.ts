@@ -14,13 +14,11 @@ export const ListItem = styled.View`
   align-items: center;
 `;
 
-interface IProps {
-  ios: boolean;
-}
-
 export const ProductGroup = styled.View``;
 
 export const ProductName = styled.Text`
+  width: 190px;
+
   color: ${colors.text};
   font-family: archivo_400;
   font-size: ${Math.min(hp('4%'), 24)}px;
@@ -72,12 +70,6 @@ export const TotalItem = styled.Text`
 export const MinusButton = styled.TouchableOpacity``;
 
 export const MinusIcon = styled(Icons)``;
-
-// export const Separator = styled(Divider)`
-//   background: ${colors.line};
-
-//   margin: 20px 5px;
-// `;
 
 interface ISeparatorProps {
   lastItem: boolean;
