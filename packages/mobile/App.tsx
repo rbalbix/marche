@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import React, { Suspense, lazy } from 'react';
+import { YellowBox } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { AppLoading } from 'expo';
 
@@ -12,6 +13,8 @@ import {
 
 import SuspenseLoading from './src/components/SuspenseLoading';
 const Routes = lazy(() => import('./src/routes'));
+
+YellowBox.ignoreWarnings(['Expected style', 'Setting a timer']);
 
 export default function App() {
   const [fonstLoaded] = useFonts({

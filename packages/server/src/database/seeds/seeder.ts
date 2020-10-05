@@ -1,6 +1,6 @@
 import { createConnection } from 'typeorm';
 
-import { seedCategory } from './Category/category.seed';
+import { seedCategory } from './Category';
 import { seedProduct } from './Product';
 
 import log from '../../services/logger';

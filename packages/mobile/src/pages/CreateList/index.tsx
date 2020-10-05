@@ -28,7 +28,7 @@ const CreateList: React.FC = () => {
     return <SuspenseLoading />;
   }
 
-  function loadCategory(uid: string) {
+  async function loadCategory(uid: string) {
     const filtered = data.find((category: ICategory) => category.id === uid);
     if (filtered) {
       setCategory(filtered);

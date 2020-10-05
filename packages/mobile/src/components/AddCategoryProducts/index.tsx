@@ -1,5 +1,6 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import useFetch from '@marche/swr-config';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { Container, CategoryName, CategoryList, Empty } from './styles';
 import SuspenseLoading from '../SuspenseLoading';
@@ -22,8 +23,22 @@ interface IProps {
 }
 
 const AddCategoryProducts: React.FC<IProps> = ({ item }: IProps) => {
-  console.log(item.id === '');
   const { data } = useFetch(`/product/category/${item.id}`);
+
+  useEffect(() => {
+    return () => {
+      async function saveAndExit() {
+        const marketList = await AsyncStorage.getItem('@new-marketList');
+        if (marketList) {
+          console.log(JSON.parse(marketList));
+          // Save MarketList
+        }
+        await AsyncStorage.removeItem('@new-marketList');
+      }
+
+      saveAndExit();
+    };
+  }, []);
 
   if (item.id !== '' && !data) {
     return <SuspenseLoading />;
