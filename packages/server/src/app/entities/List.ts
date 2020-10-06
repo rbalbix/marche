@@ -3,8 +3,11 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from 'typeorm';
+
+import { MarketList } from './MarketList';
 
 @Entity()
 export class List {
@@ -21,6 +24,9 @@ export class List {
     default: 0
   })
   productQuantity: number;
+
+  @OneToMany(() => MarketList, marketList => marketList.list)
+  public marketList!: MarketList[];
 
   @CreateDateColumn()
   public createdAt: Date;

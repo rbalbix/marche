@@ -1,10 +1,8 @@
-import React, { Suspense, lazy, useRef, useEffect } from 'react';
+import React, { Suspense, lazy, useRef } from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
 import SuspenseLoading from '../../components/SuspenseLoading';
 import { parseISO, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-
-import NetInfo from '@react-native-community/netinfo';
 
 import { Wrapper, Container, Main, Month } from './styles';
 
@@ -19,14 +17,6 @@ interface IList {
 
 const Home: React.FC = () => {
   const memoMonth = useRef('');
-
-  // useEffect(() => {
-  //   NetInfo.fetch().then(state => {
-  //     console.log('Connection type', state.type);
-  //     console.log('Is connected?', state.isConnected);
-  //   });
-  // }, []);
-
   const data: IList[] = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',

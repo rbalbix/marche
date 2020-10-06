@@ -1,4 +1,6 @@
 import React, { Suspense, lazy, useEffect } from 'react';
+
+import api from '@marche/axios-config';
 import useFetch from '@marche/swr-config';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -25,14 +27,18 @@ interface IProps {
 const AddCategoryProducts: React.FC<IProps> = ({ item }: IProps) => {
   const { data } = useFetch(`/product/category/${item.id}`);
 
+  async function saveMarketList(marketList: any) {
+    await api.post('marketList', marketList);
+  }
+
   useEffect(() => {
     return () => {
       async function saveAndExit() {
         const marketList = await AsyncStorage.getItem('@new-marketList');
         if (marketList) {
-          console.log(JSON.parse(marketList));
-          // Save MarketList
+          await saveMarketList(JSON.parse(marketList));
         }
+
         await AsyncStorage.removeItem('@new-marketList');
       }
 

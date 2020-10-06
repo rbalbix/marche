@@ -64,7 +64,6 @@ const AddMarketListItem: React.FC<IProps> = ({ item, lastItem }: IProps) => {
     if (quantity - 1 < 0) {
       return;
     }
-    // console.log('quantity state : ', quantity, quantity - 1);
     if (quantity - 1 === 0) {
       removeProduct();
       setQuantity(quantity - 1);
@@ -80,8 +79,6 @@ const AddMarketListItem: React.FC<IProps> = ({ item, lastItem }: IProps) => {
   async function removeProduct() {
     const list = await AsyncStorage.getItem('@new-marketList');
     const { id } = item;
-
-    // console.log('Product: ', id, ' qtd: ', quantity);
 
     if (list) {
       const marketList = JSON.parse(list);
@@ -99,8 +96,6 @@ const AddMarketListItem: React.FC<IProps> = ({ item, lastItem }: IProps) => {
   async function registerProductQuantity(qtd: number) {
     const list = await AsyncStorage.getItem('@new-marketList');
     const { id } = item;
-
-    // console.log('Product: ', id, ' qtd: ', quantity, list);
 
     if (list) {
       const marketList = JSON.parse(list);
@@ -133,7 +128,6 @@ const AddMarketListItem: React.FC<IProps> = ({ item, lastItem }: IProps) => {
         );
       }
     }
-    console.log(await AsyncStorage.getItem('@new-marketList'));
   }
 
   return (

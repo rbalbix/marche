@@ -4,10 +4,12 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne
+  ManyToOne,
+  OneToMany
 } from 'typeorm';
 
 import { Category } from './Category';
+import { MarketList } from './MarketList';
 
 @Entity()
 export class Product {
@@ -31,6 +33,9 @@ export class Product {
     onDelete: 'CASCADE'
   })
   category: Category;
+
+  @OneToMany(() => MarketList, marketList => marketList.product)
+  public marketList!: MarketList[];
 
   @CreateDateColumn()
   public createdAt: Date;
