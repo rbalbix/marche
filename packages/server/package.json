@@ -4,11 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "dev": "NODE_ENV=dev tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "stage": "NODE_ENV=stage tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "start": "node ./index.js",
     "migration:run": "tsnd ../../node_modules/typeorm/cli.js migration:run",
     "migration:revert": "tsnd ../../node_modules/typeorm/cli.js migration:revert",
-    "seed": "tsnd --transpile-only --ignore-watch node_modules src/database/seeds/seeder.ts",
+    "seed:dev": "NODE_ENV=dev tsnd --transpile-only --ignore-watch node_modules src/database/seeds/seeder.ts",
+    "seed:stage": "NODE_ENV=stage tsnd --transpile-only --ignore-watch node_modules src/database/seeds/seeder.ts",
     "deploy": "tsc && cp package.json dist && cd dist && yarn heroku",
     "heroku": "git commit -am \"chore(deploy): on heroku\" && git push heroku master"
   },
@@ -32,6 +34,7 @@
     "@types/helmet": "^0.0.48",
     "@types/morgan": "^1.9.1",
     "cross-env": "^7.0.2",
+    "sqlite3": "^5.0.0",
     "ts-node-dev": "^1.0.0-pre.61"
   }
 }

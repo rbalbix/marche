@@ -1,0 +1,35 @@
+[
+  {
+    "name": "dev",
+    "type": "sqlite",
+    "database": "packages/server/src/database/database.sqlite",
+    "migrations": ["./src/database/migrations/*.ts"],
+    "entities": ["./src/app/entities/*.ts"],
+    "cli": {
+      "entitiesDir": "./src/app/entities",
+      "migrationsDir": "./src/database/migration",
+      "subscribersDir": "./src/database/subscriber"
+    },
+    "logging": false,
+    "synchronize": true
+  },
+  {
+    "name": "stage",
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "marche",
+    "password": "marche",
+    "database": "marche",
+    "synchronize": false,
+    "logging": false,
+    "entities": ["./src/app/entities/*.ts"],
+    "migrations": ["./src/database/migration/*.ts"],
+    "subscribers": ["./src/database/subscriber/*.ts"],
+    "cli": {
+      "entitiesDir": "./src/app/entities",
+      "migrationsDir": "./src/app/migration",
+      "subscribersDir": "./src/app/subscriber"
+    }
+  }
+]
