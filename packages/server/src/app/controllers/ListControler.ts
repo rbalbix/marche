@@ -11,7 +11,7 @@ export class ListController {
   async index(req: Request, res: Response): Promise<Response> {
     try {
       const lists = await getRepository(List).find({
-        select: ['id', 'name', 'productQuantity'],
+        select: ['id', 'name', 'productQuantity', 'createdAt'],
         order: { createdAt: 'DESC' }
       });
 

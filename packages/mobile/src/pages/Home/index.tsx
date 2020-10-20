@@ -4,6 +4,8 @@ import SuspenseLoading from '../../components/SuspenseLoading';
 import { parseISO, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
+import useFetch from '@marche/swr-config';
+
 import { Wrapper, Container, Main, Month } from './styles';
 
 const MarketListBadge = lazy(() => import('../../components/MarketListBadge'));
@@ -16,51 +18,13 @@ interface IList {
 }
 
 const Home: React.FC = () => {
+  const { data } = useFetch('/list');
+
+  if (!data) {
+    return <SuspenseLoading />;
+  }
+
   const memoMonth = useRef('');
-  const data: IList[] = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      name: '01-AGO-2020',
-      createdAt: '2020-08-10',
-      productQuantity: 40
-    },
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bb',
-      name: '01-AGO-2020 | 02',
-      createdAt: '2020-08-01',
-      productQuantity: 15
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      name: '20-JUL-2020',
-      createdAt: '2020-07-20',
-      productQuantity: 10
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f65',
-      name: 'Lista 15-JUL-2020',
-      createdAt: '2020-07-15',
-      productQuantity: 10
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f64',
-      name: 'Lista 03-JUL-2020',
-      createdAt: '2020-07-03',
-      productQuantity: 5
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      name: 'Lista 25-JUN-2020',
-      createdAt: '2020-06-25',
-      productQuantity: 25
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d73',
-      name: 'Lista 25-MAI-2020',
-      createdAt: '2020-05-25',
-      productQuantity: 45
-    }
-  ];
 
   const renderItem: ListRenderItem<IList> = ({ item }) => {
     const currentMonth = format(parseISO(item.createdAt), 'MM');
