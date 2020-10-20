@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getConnection } from 'typeorm';
 
 import { MarketList } from '../entities/MarketList';
 import log from '../../services/logger';
@@ -23,9 +23,27 @@ export class MarketListController {
         });
       });
 
-      const result = await getRepository(MarketList).save(marketList);
+      let result: MarketList[];
+      await getConnection().transaction(async transactionalEntityManager => {
+        // Save MarketList
+        result = await transactionalEntityManager.save<MarketList>(
+          'market_list',
+          marketList
+        );
 
-      return res.status(200).send(result);
+        // Update list
+        const productQuantity = await transactionalEntityManager.count(
+          'market_list',
+          { listId: id }
+        );
+
+        await transactionalEntityManager.save('list', {
+          id,
+          productQuantity: productQuantity
+        });
+      });
+
+      return res.status(201).send(result);
     } catch (err) {
       log.error(err);
       return res.status(400).json({

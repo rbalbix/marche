@@ -32,6 +32,20 @@ export class ListController {
 
       const result = await getRepository(List).save({ name });
 
+      return res.status(201).send(result);
+    } catch (err) {
+      log.error(err);
+      return res.status(400).json({
+        message: err.message || 'Unexpected error.'
+      });
+    }
+  }
+
+  async delete(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params;
+
+      const result = await getRepository(List).delete(id);
       return res.status(200).send(result);
     } catch (err) {
       log.error(err);

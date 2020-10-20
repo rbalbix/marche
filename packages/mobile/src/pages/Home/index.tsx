@@ -1,13 +1,14 @@
-import React, { Suspense, lazy, useRef } from 'react';
+import React, { Suspense, lazy, useRef, useState } from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
-import SuspenseLoading from '../../components/SuspenseLoading';
+import { useFocusEffect } from '@react-navigation/native';
 import { parseISO, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
-import useFetch from '@marche/swr-config';
+import api from '@marche/axios-config';
 
 import { Wrapper, Container, Main, Month } from './styles';
 
+import SuspenseLoading from '../../components/SuspenseLoading';
 const MarketListBadge = lazy(() => import('../../components/MarketListBadge'));
 
 interface IList {
@@ -18,7 +19,13 @@ interface IList {
 }
 
 const Home: React.FC = () => {
-  const { data } = useFetch('/list');
+  const [data, setData] = useState<IList[]>([]);
+
+  useFocusEffect(() => {
+    api.get('list').then(response => {
+      setData(response.data);
+    });
+  });
 
   if (!data) {
     return <SuspenseLoading />;

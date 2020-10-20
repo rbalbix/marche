@@ -24,19 +24,36 @@ interface IProps {
   item: ICategory;
 }
 
+interface MarketList {
+  id: string;
+  products: Array<{
+    id: string;
+    quantity: number;
+  }>;
+}
+
 const AddCategoryProducts: React.FC<IProps> = ({ item }: IProps) => {
   const { data } = useFetch(`/product/category/${item.id}`);
 
-  async function saveMarketList(marketList: any) {
+  async function saveMarketList(marketList: MarketList) {
     await api.post('marketList', marketList);
+  }
+
+  async function deleteList(marketList: MarketList) {
+    await api.delete(`list/${marketList.id}`);
   }
 
   useEffect(() => {
     return () => {
       async function saveAndExit() {
-        const marketList = await AsyncStorage.getItem('@new-marketList');
-        if (marketList) {
-          await saveMarketList(JSON.parse(marketList));
+        const list = await AsyncStorage.getItem('@new-marketList');
+        if (list) {
+          const marketList: MarketList = JSON.parse(list);
+          if (marketList.products) {
+            await saveMarketList(marketList);
+          } else {
+            await deleteList(marketList);
+          }
         }
 
         await AsyncStorage.removeItem('@new-marketList');
