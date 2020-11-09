@@ -7,27 +7,18 @@ import { ptBR } from 'date-fns/locale';
 
 import log from '../../services/logger';
 
-interface IProduct {
-  // product: {
-  marketListId: string;
-  name: string;
+interface IListResult {
+  marketId: string;
+  quantity: number;
+  isMarked: number;
+  productName: string;
   unity: string;
-  isMarked: boolean;
-  // };
+  categoryName: string;
+  listId: string;
+  listName: string;
+  productQuantity: number;
 }
 
-interface ICategory {
-  // category: {
-  // name: string;
-  products: Array<IProduct>;
-  // };
-}
-interface IMarketList {
-  listId: string;
-  name: string;
-  productQuantity: number;
-  categories: Array<ICategory>;
-}
 export class ListController {
   async index(req: Request, res: Response): Promise<Response> {
     try {
@@ -48,8 +39,9 @@ export class ListController {
   async show(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
+      // let categoryName = '';
 
-      const products = await createQueryBuilder('list', 'l')
+      const marketList = await createQueryBuilder<IListResult>('list', 'l')
         .select([
           'l.id as listId',
           'l.name as listName',
@@ -58,6 +50,7 @@ export class ListController {
         .addSelect('ml.id', 'marketId')
         .addSelect('ml.quantity', 'quantity')
         .addSelect('ml.isMarked', 'isMarked')
+        .addSelect('c.id', 'categoryId')
         .addSelect('c.name', 'categoryName')
         .addSelect('p.name', 'productName')
         .addSelect('p.unity', 'unity')
@@ -68,36 +61,7 @@ export class ListController {
         .orderBy('c.name, p.name')
         .getRawMany();
 
-      let categoryName = '';
-      const marketList: IMarketList = {
-        listId: products[0].listId,
-        name: products[0].listName,
-        productQuantity: products[0].productQuantity,
-        categories: []
-      };
-
-      const cat = [];
-      products.map(product => {
-        if (categoryName !== product.categoryName) {
-          categoryName = product.categoryName;
-
-          console.log(product.categoryName);
-          console.log(cat[product.categoryName]);
-          cat[product.categoryName].products = new Array<IProduct>();
-        }
-        cat[product.categoryName].products.push({
-          marketListId: product.marketId,
-          name: product.productName,
-          unity: product.unity,
-          isMarked: product.isMarked
-        });
-      });
-
-      console.log(cat);
-
-      marketList.categories = cat;
-
-      return res.status(200).send({ cat });
+      return res.status(200).send({ marketList });
     } catch (err) {
       log.error(err);
       return res.status(400).json({
