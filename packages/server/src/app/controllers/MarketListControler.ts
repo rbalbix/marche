@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getConnection } from 'typeorm';
 
-import { MarketList } from '../entities/MarketList';
+import { MarketList } from '../entities';
 import log from '../../services/logger';
 
 interface Product {

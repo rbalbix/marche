@@ -12,4 +12,8 @@ const marketListController = new MarketListController();
 
 router.post('/', marketListController.store);
 
+/******************************************************************************
+ *                                     Export
+ ******************************************************************************/
+
 export { router };
