@@ -11,8 +11,10 @@ interface IListResult {
   marketId: string;
   quantity: number;
   isMarked: number;
+  productId: string;
   productName: string;
   unity: string;
+  categoryId: string;
   categoryName: string;
   listId: string;
   listName: string;
@@ -39,7 +41,6 @@ export class ListController {
   async show(req: Request, res: Response): Promise<Response> {
     try {
       const { id } = req.params;
-      // let categoryName = '';
 
       const marketList = await createQueryBuilder<IListResult>('list', 'l')
         .select([
@@ -52,6 +53,7 @@ export class ListController {
         .addSelect('ml.isMarked', 'isMarked')
         .addSelect('c.id', 'categoryId')
         .addSelect('c.name', 'categoryName')
+        .addSelect('p.id', 'productId')
         .addSelect('p.name', 'productName')
         .addSelect('p.unity', 'unity')
         .innerJoin('market_list', 'ml', 'l.id = ml.listId')
@@ -61,7 +63,7 @@ export class ListController {
         .orderBy('c.name, p.name')
         .getRawMany();
 
-      return res.status(200).send({ marketList });
+      return res.status(200).send(marketList);
     } catch (err) {
       log.error(err);
       return res.status(400).json({

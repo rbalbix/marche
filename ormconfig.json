@@ -10,7 +10,7 @@
       "migrationsDir": "./src/database/migration",
       "subscribersDir": "./src/database/subscriber"
     },
-    "logging": true,
+    "logging": false,
     "synchronize": true
   },
   {

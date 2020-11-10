@@ -31,6 +31,7 @@ const MarketListItem: React.FC<IProps> = ({ item, lastItem }: IProps) => {
 
   function handlePress() {
     setChecked(!checked);
+    alert(checked);
   }
 
   return (

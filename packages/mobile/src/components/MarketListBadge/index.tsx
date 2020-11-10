@@ -18,7 +18,7 @@ const MarketListBadge: React.FC<IProps> = ({ item }: IProps) => {
   const navigation = useNavigation();
 
   function navigateToDetail() {
-    navigation.navigate('MarketList', { listName: item.name });
+    navigation.navigate('MarketList', { id: item.id, listName: item.name });
   }
 
   return (
