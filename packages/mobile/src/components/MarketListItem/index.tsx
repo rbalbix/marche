@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Platform } from 'react-native';
 
+import api from '@marche/axios-config';
+
 import {
   Container,
   ListItem,
@@ -18,8 +20,9 @@ interface IProduct {
   id: string;
   name: string;
   unity: string;
-  isMarked: boolean;
   productQuantity: number;
+  isMarked: boolean;
+  marketListId: string;
 }
 interface IProps {
   item: IProduct;
@@ -29,9 +32,15 @@ interface IProps {
 const MarketListItem: React.FC<IProps> = ({ item, lastItem }: IProps) => {
   const [checked, setChecked] = useState(item.isMarked);
 
+  async function handleSubmit() {
+    await api.put(`marketList/${item.marketListId}`, {
+      isMarked: !checked
+    });
+  }
+
   function handlePress() {
+    handleSubmit();
     setChecked(!checked);
-    alert(checked);
   }
 
   return (

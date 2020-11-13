@@ -9,8 +9,9 @@ interface IProduct {
   id: string;
   name: string;
   unity: string;
-  isMarked: boolean;
   productQuantity: number;
+  marketListId: string;
+  isMarked: boolean;
 }
 interface IProps {
   item: {

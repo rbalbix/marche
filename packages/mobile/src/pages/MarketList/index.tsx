@@ -32,8 +32,9 @@ interface IProduct {
   id: string;
   name: string;
   unity: string;
-  isMarked: boolean;
   productQuantity: number;
+  marketListId: string;
+  isMarked: boolean;
 }
 interface IMarketList {
   id: string;
@@ -73,8 +74,9 @@ const MarketList: React.FC = () => {
           id: marketItem.productId,
           name: marketItem.productName,
           unity: marketItem.unity,
-          isMarked: marketItem.isMarked === 1,
-          productQuantity: marketItem.quantity
+          productQuantity: marketItem.quantity,
+          marketListId: marketItem.marketId,
+          isMarked: marketItem.isMarked === 1
         });
     });
 

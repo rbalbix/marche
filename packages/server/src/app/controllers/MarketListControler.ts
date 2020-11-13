@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getConnection } from 'typeorm';
+import { getConnection, getRepository } from 'typeorm';
 
 import { MarketList } from '../entities';
 import log from '../../services/logger';
@@ -44,6 +44,22 @@ export class MarketListController {
       });
 
       return res.status(201).send(result);
+    } catch (err) {
+      log.error(err);
+      return res.status(400).json({
+        message: err.message || 'Unexpected error.'
+      });
+    }
+  }
+
+  async update(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params;
+      const { isMarked } = req.body;
+
+      await getRepository(MarketList).update({ id }, { isMarked });
+
+      return res.sendStatus(200);
     } catch (err) {
       log.error(err);
       return res.status(400).json({
